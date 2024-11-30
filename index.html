@@ -157,42 +157,12 @@
       </form>
     </div>
 
-    <!-- Checkout Details -->
-    <div id="checkout-details" class="mb-6"></div>
-  </div>
+  
 
   <script>
     document.documentElement.setAttribute("data-theme", "dark");
 
-    let cart = JSON.parse(localStorage.getItem("cart")) || []; // Load the cart from localStorage
-    const delivery = 110; // Delivery fee
-
-    function loadCheckout() {
-      const checkoutDetails = document.getElementById("checkout-details");
-      if (cart.length === 0) {
-        checkoutDetails.innerHTML = "<p>Your cart is empty.</p>";
-      } else {
-        const totalPriceWithoutDelivery = cart.reduce((total, item) => {
-          const discount = calculateDiscount(item.quantity || 1, item.price);
-          return total + (item.price * (item.quantity || 1) - discount);
-        }, 0);
-        const totalPrice = totalPriceWithoutDelivery + delivery; // Add delivery fee only once
-
-        checkoutDetails.innerHTML =
-          cart
-            .map((item) => {
-              const discount = calculateDiscount(item.quantity || 1, item.price);
-              return `
-                            <div class="border p-4 rounded-lg mb-4 bg-gray-700">
-                                <h3 class="font-semibold">${item.name} (Quantity: ${item.quantity || 1})</h3>
-                                <p>Price: BDT ${item.price.toFixed(2)}</p>
-                                <p>Discount: BDT ${discount.toFixed(2)}</p>
-                            </div>`;
-            })
-            .join("") +
-          `<p class="font-bold text-lg">Total (including delivery): BDT ${totalPrice.toFixed(2)}</p>`;
-      }
-    }
+  
 
     async function handleSubmit(event) {
       event.preventDefault(); // Prevent the default form submission
